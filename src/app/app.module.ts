@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { from } from 'rxjs';
 
 import { AppComponent } from './app.component';
-import { MockdataComponent } from './mockdata/mockdata.component';
+import { MockdataComponent } from './components/mockdata/mockdata.component';
+import { LazyscrollDirective } from './directives/lazyscroll.directive';
+import { ItemlistComponent } from './components/itemlist/itemlist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MockdataComponent
+    MockdataComponent,
+    LazyscrollDirective,
+    ItemlistComponent
   ],
   imports: [
     BrowserModule,

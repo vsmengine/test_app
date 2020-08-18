@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { MockdataService } from '../../services/mockdata.service';
 
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-itemlist',
+  templateUrl: './itemlist.component.html',
+  styleUrls: ['./itemlist.component.scss']
 })
-export class MockdataService {
+export class ItemlistComponent implements OnInit {
 
-  mockData = [
+  mockitems = [
     {id: 1, photo: "https://picsum.photos/id/1/5616/3744", author: "Alejandro Escamilla", text: "uIv3zzNuszxzXJXZmxt7"},
     {id: 2, photo: "https://picsum.photos/id/0/5616/3744", author: "Alejandro Escamilla", text: "fc8g0QoOsvR182XZaJUU"},
     {id: 3, photo: "https://picsum.photos/id/2/5616/3744", author: "Alejandro Escamilla", text: "pAEBh9vSji9O8MvPeRZ7"},
@@ -31,46 +31,16 @@ export class MockdataService {
     {id: 20, photo: "https://picsum.photos/id/3/5616/3744", author: "Alejandro Escamilla", text: "tMm4Tatbhi64lKKorHvf"},
   ];
 
-  index = 0;
+  //mockitems = [];
 
-  mockDataSubject = new Subject<any>();
+  constructor(private mockDataService: MockdataService) { }
 
-  constructor(private http: HttpClient) { }
-
-  randomText(length: Number) {
-    let resultText = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      resultText += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return resultText;
-  }
-
-  requestData() {
-    const length = 20;
-    for (let j = 0; j < 1; j++) {
-      this.http.get(`https://picsum.photos/id/${this.index}/info`).pipe(
-        map((value) => {
-          let obj = {
-          'id': this.index,
-          'photo': value['download_url'],
-          'author': value['author'],
-          'text': this.randomText(length),
-          };
-          return obj;
-        })
-      ).subscribe((value) => {
-        this.mockData.push(value);
-        this.mockDataSubject.next(this.mockData);
-      });
-      this.index += 1;
-    }
-    console.log(this.mockData);
-  }
-
-  grabData() {
-    
+  ngOnInit(): void {
+    this.mockDataService.mockDataSubject.subscribe((data) => {
+        this.mockitems = data;
+        console.log(data);
+      }
+    );
   }
 
 }
