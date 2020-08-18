@@ -1,31 +1,47 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, OnDestroy } from '@angular/core';
 import { MockdataService } from '../../services/mockdata.service';
+import { WishdataService } from '../../services/wishdata.service';
+import { Subscription } from 'rxjs';
+import { LoaddataService } from '../../services/loaddata.service';
 
 @Component({
   selector: 'app-itemlist',
   templateUrl: './itemlist.component.html',
   styleUrls: ['./itemlist.component.scss']
 })
-export class ItemlistComponent implements OnInit, OnChanges {
+export class ItemlistComponent implements OnInit, OnDestroy {
 
   mockitems = [];
+  addWishItem = false;
+  itemlistSubscription: Subscription;
 
-  constructor(private mockDataService: MockdataService) { 
-    this.mockDataService.mockDataSubject.subscribe((subData) => {
+  constructor(
+    private loadDataService: LoaddataService,
+    private mockDataService: MockdataService,
+    private wishDataService: WishdataService,
+  ) { }
+
+  ngOnInit() {
+    this.loadDataService.setCompString('ListData');
+    this.loadDataService.loadData(10);
+    this.mockitems = this.mockDataService.getListData();
+    this.itemlistSubscription = this.mockDataService.lazyListDataSubject.subscribe((subData) => {
       this.mockitems = subData;
     });
   }
 
-  ngOnChanges() {
-    // this.mockDataService.mockDataSubject.subscribe((subData) => {
-    //   this.mockitems = subData;
-    // });
+  onUpdateWish(mockitem) {
+    this.wishDataService.updateWishList(mockitem);
+    // this.addWishItem = !this.addWishItem;
+    // if(this.addWishItem) {
+    //   this.wishDataService.addWishItem(mockitem);
+    // } else {
+    //   this.wishDataService.removeWishItem(mockitem);
+    // }
   }
 
-  ngOnInit() {
-    // this.mockDataService.mockDataSubject.subscribe((subData) => {
-    //   this.mockitems.push(subData);
-    // });
+  ngOnDestroy() {
+    this.itemlistSubscription.unsubscribe();
   }
 
 }

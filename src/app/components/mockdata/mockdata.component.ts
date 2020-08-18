@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MockdataService } from '../../services/mockdata.service';
+import { LoaddataService } from 'src/app/services/loaddata.service';
 
 @Component({
   selector: 'app-mockdata',
@@ -7,11 +8,15 @@ import { MockdataService } from '../../services/mockdata.service';
   styleUrls: ['./mockdata.component.scss']
 })
 export class MockdataComponent implements OnInit {
-  
-  constructor(private mockdataService: MockdataService) { }
 
-  ngOnInit() {
-    this.mockdataService.loadData(10, 'scrolldown');
+  searchMode = 'inactive';
+  
+  constructor(private loadDataService: LoaddataService) { }
+
+  ngOnInit() { }
+
+  switchSearchMode(status) {
+    this.searchMode = status;
   }
 
 }

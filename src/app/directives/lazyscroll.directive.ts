@@ -1,12 +1,19 @@
 import { Directive, HostListener, OnInit, ElementRef, HostBinding, Renderer2 } from '@angular/core';
 import { MockdataService } from '../services/mockdata.service';
+import { SearchService } from '../services/search.service';
+import { LoaddataService } from '../services/loaddata.service';
 
 @Directive({
   selector: '[appLazyscroll]'
 })
 export class LazyscrollDirective implements OnInit {
 
-  constructor(private mockdataService: MockdataService) { }
+  constructor(
+    private loadDataService: LoaddataService,
+    private mockdataService: MockdataService,
+    private searchService: SearchService,
+    private elRef: ElementRef,
+    private renderer: Renderer2) { }
 
   ngOnInit() { }
   
@@ -17,15 +24,8 @@ export class LazyscrollDirective implements OnInit {
     let wsx = window.innerHeight;
 
     if( qaz == wsx ) {
-      this.mockdataService.loadData(noItemRequest, 'scrolldown');
+      this.loadDataService.loadData(noItemRequest);
     }
-
-    // if(abc == 0) {
-    //   this.mockdataService.unloadData(noItemRequest, 'scrollup');
-    //   console.log(1);
-    // }
-    
   }; 
-
 
 }

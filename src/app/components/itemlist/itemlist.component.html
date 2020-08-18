@@ -1,6 +1,10 @@
+<p>itemlist works!</p>
+
 <div class="qaz" appLazyscroll>
-  <div *ngFor="let mockitem of mockitems">
-    <img style="height: 50px; width: auto;" src="https://www.ll-mm.com/images/placeholders/testimonial-placeholder.jpg">
-    <p>itemlist works!</p>
+  <div (click)="onUpdateWish(mockitem)" *ngFor="let mockitem of mockitems" appWishitem>
+    <div>
+      <img style="height: 50px; width: auto;" src="{{mockitem.photo}}">
+      <p>itemlist works!</p>
+    </div>
   </div>
 </div>
