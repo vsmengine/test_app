@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MockdataService } from '../../services/mockdata.service';
 import { LoaddataService } from 'src/app/services/loaddata.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-mockdata',
@@ -11,12 +12,15 @@ export class MockdataComponent implements OnInit {
 
   searchMode = 'inactive';
   
-  constructor(private loadDataService: LoaddataService) { }
+  constructor(
+    private loadDataService: LoaddataService,
+    private searchDataService: SearchService
+  ) { }
 
-  ngOnInit() { }
-
-  switchSearchMode(status) {
-    this.searchMode = status;
+  ngOnInit() { 
+    this.searchDataService.searchModeSubject.subscribe((status) => {
+      this.searchMode = status;
+    });
   }
 
 }

@@ -32,12 +32,6 @@ export class SearchlistComponent implements OnInit, OnDestroy {
 
   onUpdateWish(searchitem) {
     this.wishDataService.updateWishList(searchitem);
-    // this.addWishItem = !this.addWishItem;
-    // if(this.addWishItem) {
-    //   this.wishDataService.addWishItem(searchitem);
-    // } else {
-    //   this.wishDataService.removeWishItem(searchitem);
-    // }
   }
 
   ngOnDestroy() {
