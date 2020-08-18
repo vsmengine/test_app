@@ -1,5 +1,4 @@
-<app-wishlist></app-wishlist>
-<app-search (searchStatus)="switchSearchMode($event)"></app-search>
-<app-searchlist *ngIf="searchMode == 'active'"></app-searchlist>
-<app-itemlist *ngIf="searchMode !== 'active'"></app-itemlist>
 
+<app-itemlist *ngIf="searchMode !== 'active'"></app-itemlist>
+<app-searchlist *ngIf="searchMode == 'active'"></app-searchlist>
+    

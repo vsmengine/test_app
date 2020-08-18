@@ -1,10 +1,7 @@
-<p>itemlist works!</p>
-
-<div class="qaz" appLazyscroll>
-  <div (click)="onUpdateWish(mockitem)" *ngFor="let mockitem of mockitems" appWishitem>
-    <div>
-      <img style="height: 50px; width: auto;" src="{{mockitem.photo}}">
-      <p>itemlist works!</p>
-    </div>
-  </div>
+<div appLazyscroll>
+  <ul class="list-group shadow">
+    <li class="list-group-item" (click)="onUpdateWish(mockitem)" *ngFor="let mockitem of mockitems" appWishitem>
+      <app-item [listItem]="mockitem"></app-item>  
+    </li>
+  </ul>
 </div>

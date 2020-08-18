@@ -22,9 +22,13 @@ export class WishlistComponent implements OnInit, OnDestroy {
     this.loadDataService.setCompString('WishData');
     this.loadDataService.loadData(10);
     this.wishitems = this.wishDataService.getWishItems();
-    this.wishDataService.lazyWishDataSubject.subscribe((newData) => {
+    this.wishItemSubscription = this.wishDataService.lazyWishDataSubject.subscribe((newData) => {
       this.wishitems = newData;
     });
+  }
+
+  onUpdateWish(mockitem) {
+    this.wishDataService.updateWishList(mockitem);
   }
 
   ngOnDestroy() {

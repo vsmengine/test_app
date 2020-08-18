@@ -10,9 +10,7 @@ import { LoaddataService } from 'src/app/services/loaddata.service';
 })
 export class SearchComponent implements OnInit {
 
-  @ViewChild('f') serachForm: NgForm;
-  @Output() searchStatus = new EventEmitter<any>();
-  // isSearchOpen = false;
+  @ViewChild('searchForm') serachForm: NgForm;
 
   constructor(
     private searchDataService: SearchService
@@ -23,26 +21,15 @@ export class SearchComponent implements OnInit {
   onSerachSubmit() {
     let searchValue = this.serachForm.controls['search'].value;
     this.searchDataService.searchData(searchValue);
-    this.searchStatus.emit('active');
-    // this.toggleSearch();
+    this.searchDataService.searchModeSubject.next('active');
   }
 
-  // toggleSearch() {
-  //   if(this.isSearchOpen === false) {
-  //     this.isSearchOpen = true;
-  //     this.searchStatus.emit('active');
-  //   } else {
-  //     return;
-  //   }
-  // }
-
   onSearchOpen() {
-    this.searchStatus.emit('active');
+    this.searchDataService.searchModeSubject.next('active');
   }
 
   onSearchCancel() {
-    //this.isSearchOpen = false;
-    this.searchStatus.emit('inactive');
+    this.searchDataService.searchModeSubject.next('inactive');
   }
 
 }

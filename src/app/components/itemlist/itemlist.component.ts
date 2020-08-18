@@ -32,12 +32,6 @@ export class ItemlistComponent implements OnInit, OnDestroy {
 
   onUpdateWish(mockitem) {
     this.wishDataService.updateWishList(mockitem);
-    // this.addWishItem = !this.addWishItem;
-    // if(this.addWishItem) {
-    //   this.wishDataService.addWishItem(mockitem);
-    // } else {
-    //   this.wishDataService.removeWishItem(mockitem);
-    // }
   }
 
   ngOnDestroy() {

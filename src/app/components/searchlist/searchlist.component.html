@@ -1,12 +1,7 @@
-<p>searchlist works!</p>
-
-<div class="wsx" appLazyscroll>
-    <div (click)="onUpdateWish(searchitem)" *ngFor="let searchitem of searchitems" appWishitem>
-      <div>
-        <img style="height: 50px; width: auto;" src="{{searchitem.photo}}">
-        <p>searchlist works!</p>
-      </div>
-    </div>
-  </div>
-
-<p>searchlist end</p>
+<div appLazyscroll>
+  <ul class="list-group shadow">
+    <li class="list-group-item" (click)="onUpdateWish(searchitem)" *ngFor="let searchitem of searchitems" appWishitem>
+      <app-item [listItem]="searchitem"></app-item>  
+    </li>
+  </ul>
+</div>

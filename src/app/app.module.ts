@@ -15,6 +15,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchlistComponent } from './components/searchlist/searchlist.component';
 import { WishitemDirective } from './directives/wishitem.directive';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ItemComponent } from './components/item/item.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
     SearchComponent,
     SearchlistComponent,
     WishitemDirective,
-    WishlistComponent
+    WishlistComponent,
+    ItemComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -10,11 +10,7 @@ export class SearchService {
 
   mockData = (data  as  any).default;
   searchedData = [];
-
-  // updatedSearchData = [];
-  // searchDataSubject = new Subject<any>();
-  // dataCount = 0;
-
+  searchModeSubject = new Subject<any>();
   lazySearchData = [];
   lazySearchDataSubject = new Subject<any>();
   lazySearchDataCount = 0;
