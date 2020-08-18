@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { MockdataComponent } from './components/mockdata/mockdata.component';
 import { LazyscrollDirective } from './directives/lazyscroll.directive';
 import { ItemlistComponent } from './components/itemlist/itemlist.component';
+import { LazyloadDirective } from './directives/lazyload.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     MockdataComponent,
     LazyscrollDirective,
-    ItemlistComponent
+    ItemlistComponent,
+    LazyloadDirective
   ],
   imports: [
     BrowserModule,
