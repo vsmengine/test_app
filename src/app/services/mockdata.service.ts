@@ -11,43 +11,26 @@ import  *  as  data  from  '../mockdata.json';
 export class MockdataService {
 
   mockData = (data  as  any).default;
-  updatedMockData = [];
-  mockDataSubject = new Subject<any>();
-  dataCount = 0;
+
+  lazyListData = [];
+  lazyListDataSubject = new Subject<any>();
+  lazyListDataCount = 0;
 
   constructor(private http: HttpClient) { }
 
-  loadData(noReqItems: Number, scrollDirection: String) {
-    let loadItems = noReqItems;
-    let scrollDir = scrollDirection;
-    // if(loadItems == 1) {
-    //   this.updatedMockData.shift();
-    //   console.log('load');
-    // }
-    for (let index = 0; index < loadItems; index++) {
-      this.updatedMockData.push(this.mockData[this.dataCount]);
-      this.mockDataSubject.next(this.updatedMockData);
-      this.dataCount = this.dataCount + 1;
-    }
-    console.log(this.updatedMockData);
+  getListData() {
+    return [...this.lazyListData];
   }
 
-  // unloadData(noReqItems: Number, scrollDirection: String) {
-  //   let loadItems = noReqItems;
-  //   let scrollDir = scrollDirection;
-  //   if(loadItems == 1) {
-  //     this.updatedMockData.pop();
-  //     console.log('unload');
-  //   }
-  //   for (let index = 0; index < loadItems; index++) {
-  //     this.updatedMockData.unshift(this.mockData[this.dataCount-11]);
-  //     this.mockDataSubject.next(this.updatedMockData);
-  //     this.dataCount = this.dataCount - 1;
-  //   }
-  //   console.log(this.updatedMockData);
-  // }
-
-
+  reqListData(requestItems) {
+    for (let index = 0; index < requestItems; index++) {
+      if (this.lazyListDataCount < this.mockData.length) {
+        this.lazyListData.push(this.mockData[this.lazyListDataCount]);
+        this.lazyListDataSubject.next(this.lazyListData);
+        this.lazyListDataCount = this.lazyListDataCount + 1;
+      }
+    }
+  }
 
   //mockData = [];
   //mockDataSubject = new Subject<any>();

@@ -11,18 +11,16 @@ export class LazyloadDirective implements OnInit {
   ngOnInit() {
     let winInnHeight = window.innerHeight;
     let elOffsetTop = this.elRef.nativeElement.offsetTop;
-    let index = 0;
 
     const srcUrl = 'https://www.ll-mm.com/images/placeholders/testimonial-placeholder.jpg';
 
-    //if(elOffsetTop < winInnHeight) {
-      // this.elRef.nativeElement.firstElementChild.setAttribute("src", srcUrl);
+    if(elOffsetTop > winInnHeight) {
+      //this.renderer.setStyle(this.elRef.nativeElement, 'display', 'none');
+      //console.log(this.elRef.nativeElement.getBoundingClientRect().top);
       // index += 1;
       // console.log(index);
-      //console.log('in');
-    //}
-
-    //console.log(this.elRef.nativeElement.getBoundingClientRect());
+      // console.log('in');
+    }
 
   }
 
