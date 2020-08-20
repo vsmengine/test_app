@@ -1,6 +1,5 @@
 <form class="form-inline my-2 my-lg-0" (ngSubmit)="onSerachSubmit()" #searchForm="ngForm">
     <input class="form-control mr-sm-2" type="text" name="search" ngModel #serach="ngModel" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <!-- <button class="btn__cancel-search" *ngIf="searchMode != 'inactive'" (click)="onSearchCancel()">Back To Results</button> -->
 </form>
-
-<button (click)="onSearchCancel()">Cancel Search</button>

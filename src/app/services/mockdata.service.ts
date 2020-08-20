@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { Item } from '../models/item.model';
+
 import  *  as  data  from  '../mockdata.json';
 
 @Injectable({
@@ -14,15 +16,15 @@ export class MockdataService {
 
   mockData = (data  as  any).default;
 
-  lazyListData = [];
-  lazyListDataSubject = new Subject<any>();
-  lazyListDataCount = 0;
+  lazyListData: Item[] = [];
+  lazyListDataSubject = new Subject<Item[]>();
+  lazyListDataCount: number = 0;
 
   getListData() {
     return [...this.lazyListData];
   }
 
-  reqListData(requestItems) {
+  reqListData(requestItems: number) {
     if(requestItems > 1) {
       this.lazyListData = [];
       this.lazyListDataCount = 0;

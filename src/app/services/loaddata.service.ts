@@ -9,7 +9,7 @@ import { WishdataService } from './wishdata.service';
 })
 export class LoaddataService {
 
-  componentString;
+  viewString: string;
 
   constructor(
     private mockDataService : MockdataService,
@@ -17,17 +17,17 @@ export class LoaddataService {
     private wishDataService : WishdataService
   ) { }
 
-  setCompString(compString) {
-    this.componentString = compString;
+  setCompString(compString: string) {
+    this.viewString = compString;
   }
 
-  loadData(noReqItems: Number) {
+  loadData(noReqItems: number) {
     let loadItems = noReqItems;
-    if(this.componentString === 'ListData') {
+    if(this.viewString === 'ListData') {
       this.mockDataService.reqListData(loadItems);
-    } else if(this.componentString === 'SearchData') {
+    } else if(this.viewString === 'SearchData') {
       this.searchDataService.reqSearchData(loadItems);
-    } else if(this.componentString === 'WishData') {
+    } else if(this.viewString === 'WishData') {
       this.wishDataService.reqWishData(loadItems);
     }
   }

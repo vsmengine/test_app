@@ -19,11 +19,11 @@ export class LazyscrollDirective implements OnInit {
   
   @HostListener('window:scroll', ['$event']) lazyscroll(eventData: Event) {
     const noItemRequest = 1; 
-    let abc = document.documentElement.scrollTop;
-    let qaz = document.documentElement.offsetHeight - document.documentElement.scrollTop;
-    let wsx = window.innerHeight;
+    let winScrollTop = document.documentElement.scrollTop;
+    let winRestHeight = document.documentElement.offsetHeight - winScrollTop;
+    let winInnerHeight = window.innerHeight;
 
-    if( qaz == wsx ) {
+    if( winRestHeight == winInnerHeight ) {
       this.loadDataService.loadData(noItemRequest);
     }
   }; 

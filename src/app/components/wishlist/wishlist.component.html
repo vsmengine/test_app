@@ -1,7 +1,10 @@
 <div appLazyscroll>
   <ul class="list-group shadow">
-    <li class="list-group-item" (click)="onUpdateWish(wishitem)" *ngFor="let wishitem of wishitems" appWishitem>
+    <li class="list-group-item" *ngFor="let wishitem of wishitems">
       <app-item [listItem]="wishitem"></app-item>  
+      <div class="btn__delete">
+        <button type="button" class="btn btn-secondary" (click)="onUpdateWish(wishitem)">Delete</button>
+      </div>
     </li>
   </ul>
 </div>

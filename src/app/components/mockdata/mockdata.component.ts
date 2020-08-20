@@ -10,7 +10,7 @@ import { SearchService } from 'src/app/services/search.service';
 })
 export class MockdataComponent implements OnInit {
 
-  searchMode = 'inactive';
+  searchMode: string = 'inactive';
   
   constructor(
     private loadDataService: LoaddataService,
@@ -18,7 +18,7 @@ export class MockdataComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.searchDataService.searchModeSubject.subscribe((status) => {
+    this.searchDataService.searchModeSubject.subscribe((status: string) => {
       this.searchMode = status;
     });
   }
