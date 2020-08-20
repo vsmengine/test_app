@@ -3,6 +3,7 @@ import { MockdataService } from '../../services/mockdata.service';
 import { WishdataService } from '../../services/wishdata.service';
 import { Subscription } from 'rxjs';
 import { LoaddataService } from '../../services/loaddata.service';
+import { Item } from 'src/app/models/item.model';
 
 @Component({
   selector: 'app-itemlist',
@@ -11,8 +12,8 @@ import { LoaddataService } from '../../services/loaddata.service';
 })
 export class ItemlistComponent implements OnInit, OnDestroy {
 
-  mockitems = [];
-  addWishItem = false;
+  mockitems: Item[] = [];
+  addWishItem: boolean = false;
   itemlistSubscription: Subscription;
 
   constructor(
@@ -25,12 +26,12 @@ export class ItemlistComponent implements OnInit, OnDestroy {
     this.loadDataService.setCompString('ListData');
     this.loadDataService.loadData(10);
     this.mockitems = this.mockDataService.getListData();
-    this.itemlistSubscription = this.mockDataService.lazyListDataSubject.subscribe((subData) => {
+    this.itemlistSubscription = this.mockDataService.lazyListDataSubject.subscribe((subData: Item[]) => {
       this.mockitems = subData;
     });
   }
 
-  onUpdateWish(mockitem) {
+  onUpdateWish(mockitem: Item) {
     this.wishDataService.updateWishList(mockitem);
   }
 

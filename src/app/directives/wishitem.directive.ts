@@ -7,16 +7,16 @@ import { WishdataService } from '../services/wishdata.service';
 export class WishitemDirective {
 
   constructor() { }
+  count: number = 2;
 
-  count = 2;
-  @HostBinding('style.borderBottom') borderBottom;
-
+  @HostBinding('style.backgroundColor') backgroundColor;
+  
   @HostListener('click', ['$event']) wishitem(eventData: Event) {
     let countCheck = this.count % 2;
     if(countCheck == 0) {
-      this.borderBottom = '1px solid red';
+      this.backgroundColor = '#ffe0f0';
     } else {
-      this.borderBottom = '1px solid transparent';
+      this.backgroundColor = 'transparent';
     }
     this.count += 1;
   }

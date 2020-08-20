@@ -2,6 +2,7 @@ import { Injectable, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import  *  as  data  from  '../mockdata.json';
+import { Item } from '../models/item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,21 @@ import  *  as  data  from  '../mockdata.json';
 export class SearchService {
 
   mockData = (data  as  any).default;
-  searchedData = [];
-  searchModeSubject = new Subject<any>();
-  lazySearchData = [];
-  lazySearchDataSubject = new Subject<any>();
-  lazySearchDataCount = 0;
+  searchedData: Item[] = [];
+  searchModeSubject = new Subject<string>();
+  lazySearchData: Item[] = [];
+  lazySearchDataSubject = new Subject<Item[]>();
+  lazySearchDataCount: number = 0;
 
   constructor() { }
 
-  searchData(searchValue) {
+  searchData(searchValue: any) {
     if(this.searchedData.length > 0) {
       this.searchedData = [];
     }
     for(var i = 0; i < this.mockData.length; i++){
       for(var j = 0; j < 3; j++) {
-        let keys =['id', 'author', 'text'];
+        let keys: string[] = ['id', 'author', 'text'];
         if(this.mockData[i][keys[j]] == searchValue) {
           this.searchedData.push(this.mockData[i]);
         }
@@ -36,7 +37,7 @@ export class SearchService {
     return [...this.lazySearchData];
   }
 
-  reqSearchData(requestItems) {
+  reqSearchData(requestItems: number) {
     if(requestItems > 1) {
       this.lazySearchData = [];
       this.lazySearchDataCount = 0;

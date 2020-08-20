@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { MockdataComponent } from './components/mockdata/mockdata.component';
 import { LazyscrollDirective } from './directives/lazyscroll.directive';
 import { ItemlistComponent } from './components/itemlist/itemlist.component';
-import { LazyloadDirective } from './directives/lazyload.directive';
 import { SearchComponent } from './components/search/search.component';
 import { SearchlistComponent } from './components/searchlist/searchlist.component';
 import { WishitemDirective } from './directives/wishitem.directive';
@@ -24,7 +23,6 @@ import { HeaderComponent } from './components/header/header.component';
     MockdataComponent,
     LazyscrollDirective,
     ItemlistComponent,
-    LazyloadDirective,
     SearchComponent,
     SearchlistComponent,
     WishitemDirective,

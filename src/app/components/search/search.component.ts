@@ -10,13 +10,18 @@ import { LoaddataService } from 'src/app/services/loaddata.service';
 })
 export class SearchComponent implements OnInit {
 
+  searchMode: string = 'inactive';
   @ViewChild('searchForm') serachForm: NgForm;
 
   constructor(
     private searchDataService: SearchService
   ) { }
-
-  ngOnInit() { }
+  
+  ngOnInit() { 
+    this.searchDataService.searchModeSubject.subscribe((status: string) => {
+      this.searchMode = status;
+    });
+  }
 
   onSerachSubmit() {
     let searchValue = this.serachForm.controls['search'].value;

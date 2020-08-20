@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WishdataService } from 'src/app/services/wishdata.service';
 import { Subscription } from 'rxjs';
 import { LoaddataService } from 'src/app/services/loaddata.service';
+import { Item } from 'src/app/models/item.model';
 
 @Component({
   selector: 'app-wishlist',
@@ -10,7 +11,7 @@ import { LoaddataService } from 'src/app/services/loaddata.service';
 })
 export class WishlistComponent implements OnInit, OnDestroy {
 
-  wishitems = [];
+  wishitems: Item[] = [];
   wishItemSubscription : Subscription;
 
   constructor(
@@ -22,12 +23,12 @@ export class WishlistComponent implements OnInit, OnDestroy {
     this.loadDataService.setCompString('WishData');
     this.loadDataService.loadData(10);
     this.wishitems = this.wishDataService.getWishItems();
-    this.wishItemSubscription = this.wishDataService.lazyWishDataSubject.subscribe((newData) => {
-      this.wishitems = newData;
+    this.wishItemSubscription = this.wishDataService.lazyWishDataSubject.subscribe((subData: Item[]) => {
+      this.wishitems = subData;
     });
   }
 
-  onUpdateWish(mockitem) {
+  onUpdateWish(mockitem: Item) {
     this.wishDataService.updateWishList(mockitem);
   }
 

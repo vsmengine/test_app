@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Item } from '../models/item.model';
 
 const storageWishList = 'wish-list-storage';
 // const storageWishId = 'wish-id-storage';
@@ -9,23 +10,18 @@ const storageWishList = 'wish-list-storage';
 })
 export class WishdataService {
 
-  private wishList = [];
-  initWishList = []
+  wishList: Item[] = [];
+  initWishList: Item[] = []
 
-  lazyWishData = [];
-  lazyWishDataSubject = new Subject<any>();
-  lazyWishDataCount = 0;
-
-  // wishIdList = [];
-  // statusWishIdSubject = new Subject<any>();
-
+  lazyWishData: Item[] = [];
+  lazyWishDataSubject = new Subject<Item[]>();
+  lazyWishDataCount: number = 0;
 
   constructor() { 
     this.wishList = JSON.parse(localStorage.getItem(storageWishList)) || this.initWishList;
-    // this.wishIdList = JSON.parse(localStorage.getItem(storageWishId));
   }
 
-  reqWishData(requestItems) {
+  reqWishData(requestItems: number) {
     if(requestItems > 1) {
       this.lazyWishData = [];
       this.lazyWishDataCount = 0;
@@ -43,7 +39,7 @@ export class WishdataService {
     return [...this.lazyWishData];
   }
 
-  updateWishList(wishitem) {
+  updateWishList(wishitem: Item) {
     if(this.findItemIndex(wishitem) >= 0) {
       this.removeWishItem(wishitem);
     } else {
@@ -51,18 +47,18 @@ export class WishdataService {
     }
   }
 
-  private addWishItem(wishitem) {
+  private addWishItem(wishitem: Item) {
     this.wishList.push(wishitem);
     this.update();
   }
 
-  private removeWishItem(wishitem) {
+  private removeWishItem(wishitem: Item) {
     this.wishList.splice(this.findItemIndex(wishitem), 1);
     this.lazyWishData.splice(this.findItemIndex(wishitem), 1);
     this.update();
   }
 
-  private findItemIndex(wishitem) {
+  private findItemIndex(wishitem: Item) {
     for (let index = 0; index < this.wishList.length; index++) {
       if(this.wishList[index]['id'] == wishitem['id']) {
         console.log(index);
@@ -73,7 +69,6 @@ export class WishdataService {
 
   private update() {
     localStorage.setItem(storageWishList, JSON.stringify(this.wishList));
-    // localStorage.setItem(storageWishId, JSON.stringify(this.wishList));
     this.lazyWishDataSubject.next(this.lazyWishData);
   }
 
