@@ -18,9 +18,8 @@ export class SearchService {
   constructor() { }
 
   searchData(searchValue) {
-    if(this.searchedData.length > 0 || this.lazySearchData.length > 0) {
+    if(this.searchedData.length > 0) {
       this.searchedData = [];
-      this.lazySearchData = [];
     }
     for(var i = 0; i < this.mockData.length; i++){
       for(var j = 0; j < 3; j++) {
@@ -30,7 +29,6 @@ export class SearchService {
         }
       }
     }
-    this.lazySearchDataCount = 0;
     this.reqSearchData(10);
   }
 
@@ -39,23 +37,17 @@ export class SearchService {
   }
 
   reqSearchData(requestItems) {
+    if(requestItems > 1) {
+      this.lazySearchData = [];
+      this.lazySearchDataCount = 0;
+    } 
     for (let index = 0; index < requestItems; index++) {
       if (this.lazySearchDataCount < this.searchedData.length) {
         this.lazySearchData.push(this.searchedData[this.lazySearchDataCount]);
         this.lazySearchDataSubject.next(this.lazySearchData);
         this.lazySearchDataCount = this.lazySearchDataCount + 1;
-      }
+      } else return
     }
   }
-
-  // loadData(noReqItems: Number) {
-  //   let loadItems = noReqItems;
-  //   for (let index = 0; index < loadItems; index++) {
-  //     this.updatedSearchData.push(this.searchedData[this.dataCount]);
-  //     this.searchDataSubject.next(this.updatedSearchData);
-  //     this.dataCount = this.dataCount + 1;
-  //   }
-  //   console.log('search service');
-  // }
 
 }
